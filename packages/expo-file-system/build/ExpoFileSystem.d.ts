@@ -1,4 +1,4 @@
-import { NativeModule } from 'expo-modules-core';
+import { NativeModule } from 'expo';
 import type { Directory } from './Directory';
 import type { File } from './File';
 import type { PickMultipleFilesOptions, PickSingleFileOptions } from './File.types';

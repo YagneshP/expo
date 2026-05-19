@@ -1,4 +1,4 @@
-import { CodedError, Platform, type EventSubscription } from 'expo-modules-core';
+import { CodedError, Platform, type EventSubscription } from 'expo';
 
 import type { KeepAwakeListener } from './KeepAwake.types';
 import { KeepAwakeEventState } from './KeepAwake.types';

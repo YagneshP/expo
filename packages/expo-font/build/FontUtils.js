@@ -1,4 +1,4 @@
-import { UnavailabilityError } from 'expo-modules-core';
+import { UnavailabilityError } from 'expo';
 import { processColor } from 'react-native';
 import ExpoFontUtils from './ExpoFontUtils';
 /**

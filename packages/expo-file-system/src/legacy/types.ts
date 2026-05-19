@@ -1,4 +1,4 @@
-import { NativeModule } from 'expo-modules-core';
+import { NativeModule } from 'expo';
 
 import type { DownloadProgressData, ProgressEvent, UploadProgressData } from './FileSystem.types';
 

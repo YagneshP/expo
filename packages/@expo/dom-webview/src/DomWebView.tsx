@@ -1,4 +1,4 @@
-import { requireNativeViewManager } from 'expo-modules-core';
+import { requireNativeView } from 'expo';
 import * as React from 'react';
 import { Image, View } from 'react-native';
 
@@ -13,7 +13,7 @@ type NativeWebViewProps = Omit<DomWebViewProps, 'containerStyle' | 'injectedJava
 
 const NativeWebView: React.ComponentType<
   React.PropsWithoutRef<NativeWebViewProps> & React.RefAttributes<DomWebViewRef>
-> = requireNativeViewManager('ExpoDomWebViewModule');
+> = requireNativeView('ExpoDomWebViewModule');
 
 const WebView = React.forwardRef<DomWebViewRef, DomWebViewProps>(
   ({ containerStyle, style, injectedJavaScriptObject, ...props }, ref) => {

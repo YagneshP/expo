@@ -1,4 +1,4 @@
-import { Platform } from 'expo-modules-core';
+import { Platform } from 'expo';
 
 import { DEFAULT_DEBOUNCE_MS, Directory, File } from '../..';
 import { FileSystemWatcher } from '../internal/FileSystemWatcher';

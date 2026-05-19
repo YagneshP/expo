@@ -1,4 +1,4 @@
-import { CodedError, Platform, UnavailabilityError } from 'expo-modules-core';
+import { CodedError, Platform, UnavailabilityError } from 'expo';
 import ExpoFontLoader from './ExpoFontLoader';
 import { getAssetForSource, loadSingleFontAsync } from './FontLoader';
 import { isLoadedInCache, isLoadedNative, loadPromises, markLoaded, purgeCache, purgeFontFamilyFromCache, } from './memory';

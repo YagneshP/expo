@@ -1,5 +1,5 @@
 import { Asset } from 'expo-asset';
-import { CodedError } from 'expo-modules-core';
+import { CodedError } from 'expo';
 
 import ExpoFontLoader from './ExpoFontLoader';
 import type { FontResource, FontSource } from './Font.types';

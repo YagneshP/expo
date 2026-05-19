@@ -1,4 +1,4 @@
-import { NativeModule, registerWebModule, UnavailabilityError } from 'expo-modules-core';
+import { NativeModule, registerWebModule, UnavailabilityError } from 'expo';
 class ExpoFontUtils extends NativeModule {
     async renderToImageAsync(glyphs, options) {
         throw new UnavailabilityError('expo-font', 'renderToImageAsync');

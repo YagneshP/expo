@@ -1,4 +1,4 @@
-import { requireNativeModule } from 'expo-modules-core';
+import { requireNativeModule } from 'expo';
 const m = typeof window === 'undefined'
     ? // React server mock
         {

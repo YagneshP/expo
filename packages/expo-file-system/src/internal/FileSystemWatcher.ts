@@ -1,4 +1,4 @@
-import type { EventSubscription } from 'expo-modules-core';
+import type { EventSubscription } from 'expo';
 
 import type { Directory } from '../Directory';
 import ExpoFileSystem from '../ExpoFileSystem';

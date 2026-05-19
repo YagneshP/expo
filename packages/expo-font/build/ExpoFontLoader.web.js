@@ -1,4 +1,4 @@
-import { CodedError, registerWebModule } from 'expo-modules-core';
+import { CodedError, registerWebModule } from 'expo';
 import FontObserver from 'fontfaceobserver';
 import { FontDisplay } from './Font.types';
 function getFontFaceStyleSheet() {

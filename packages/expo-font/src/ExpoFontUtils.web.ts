@@ -1,4 +1,4 @@
-import { NativeModule, registerWebModule, UnavailabilityError } from 'expo-modules-core';
+import { NativeModule, registerWebModule, UnavailabilityError } from 'expo';
 
 import type { RenderToImageOptions } from './FontUtils.types';
 

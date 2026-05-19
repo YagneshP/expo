@@ -1,5 +1,5 @@
 // TODO(@kitten): Add missing optional peers
-import { CodedError, requireOptionalNativeModule } from 'expo-modules-core';
+import { CodedError, requireOptionalNativeModule } from 'expo';
 import { Platform, NativeModules } from 'react-native';
 import { ExecutionEnvironment } from './Constants.types';
 import ExponentConstants from './ExponentConstants';

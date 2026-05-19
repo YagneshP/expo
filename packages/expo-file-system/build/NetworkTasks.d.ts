@@ -1,4 +1,4 @@
-import type { EventSubscription } from 'expo-modules-core';
+import type { EventSubscription } from 'expo';
 import { Directory } from './Directory';
 import { File } from './File';
 import type { DownloadProgress, DownloadPauseState, DownloadTaskOptions, DownloadTaskState, UploadOptions, UploadProgress, UploadResult, UploadTaskState } from './NetworkTasks.types';

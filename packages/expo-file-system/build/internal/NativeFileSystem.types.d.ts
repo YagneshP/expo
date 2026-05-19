@@ -1,4 +1,4 @@
-import type { SharedObject } from 'expo-modules-core';
+import type { SharedObject } from 'expo';
 import type { Directory as PublicDirectory } from '../Directory';
 import type { DirectoryCreateOptions, DirectoryInfo } from '../Directory.types';
 import type { File as PublicFile } from '../File';

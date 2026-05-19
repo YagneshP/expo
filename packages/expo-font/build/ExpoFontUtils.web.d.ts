@@ -1,4 +1,4 @@
-import { NativeModule } from 'expo-modules-core';
+import { NativeModule } from 'expo';
 import type { RenderToImageOptions } from './FontUtils.types';
 declare class ExpoFontUtils extends NativeModule {
     renderToImageAsync(glyphs: string, options?: RenderToImageOptions): Promise<string>;
