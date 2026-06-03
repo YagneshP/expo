@@ -42,6 +42,10 @@ internal struct DynamicBoolType: AnyDynamicType {
     throw Conversions.ConversionToJSFailedException((kind: .bool, nativeType: ValueType.self))
   }
 
+  var isJSThreadDecodable: Bool {
+    return true
+  }
+
   var description: String {
     "Bool"
   }

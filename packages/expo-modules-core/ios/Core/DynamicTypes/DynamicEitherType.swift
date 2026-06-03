@@ -65,6 +65,10 @@ internal struct DynamicEitherType<EitherType: AnyEither>: AnyDynamicType {
     return try Conversions.anyToJavaScriptValue(value, appContext: appContext)
   }
 
+  var isJSThreadDecodable: Bool {
+    return eitherType.dynamicTypes().allSatisfy { $0.isJSThreadDecodable }
+  }
+
   var description: String {
     let types = eitherType.dynamicTypes()
     return "Either<\(types.map(\.description).joined(separator: ", "))>"

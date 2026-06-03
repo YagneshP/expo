@@ -38,6 +38,10 @@ internal struct DynamicStringType: AnyDynamicType {
     throw Conversions.ConversionToJSFailedException((kind: .string, nativeType: ValueType.self))
   }
 
+  var isJSThreadDecodable: Bool {
+    return true
+  }
+
   var description: String {
     "String"
   }

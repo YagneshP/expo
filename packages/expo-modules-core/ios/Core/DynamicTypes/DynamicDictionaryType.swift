@@ -96,6 +96,10 @@ internal struct DynamicDictionaryType: AnyDynamicType {
     return jsObject.asValue()
   }
 
+  var isJSThreadDecodable: Bool {
+    return valueType.isJSThreadDecodable
+  }
+
   var description: String {
     "[Hashable: \(valueType.description)]"
   }

@@ -66,6 +66,10 @@ internal struct DynamicRawType<InnerType>: AnyDynamicType {
     return result
   }
 
+  var isJSThreadDecodable: Bool {
+    return true
+  }
+
   var description: String {
     String(describing: innerType.self)
   }

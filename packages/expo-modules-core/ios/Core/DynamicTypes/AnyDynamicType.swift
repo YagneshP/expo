@@ -59,6 +59,20 @@ public protocol AnyDynamicType: CustomStringConvertible, Sendable {
    and conversion to simpler types (dictionary, primitive value or specific JS value).
    */
   func convertResult<ResultType>(_ result: ResultType, appContext: AppContext) throws -> Any
+
+  /**
+   Whether a value produced by `cast(jsValue:)` for this type is safe to create on the
+   JavaScript thread and then hand to a `@MainActor` consumer (e.g. a view prop setter).
+
+   This is `true` only when decoding produces a detached, thread-agnostic value that holds
+   no live JSI handle and touches no main-thread-only API during decoding. It is used to
+   decide whether a view prop can be decoded straight from the JS value on the JavaScript
+   thread, or must fall back to the main-thread dictionary path.
+
+   The default is `false` (conservative). Container types return the conjunction over their
+   inner type(s).
+   */
+  var isJSThreadDecodable: Bool { get }
 }
 
 extension AnyDynamicType {
@@ -87,6 +101,14 @@ extension AnyDynamicType {
 
   func convertResult<ResultType>(_ result: ResultType, appContext: AppContext) throws -> Any {
     return result
+  }
+
+  // Conservative default: a type is assumed unsafe to decode on the JS thread unless it
+  // explicitly opts in. Leaf types that produce detached values override this to `true`;
+  // container types override it to fold over their inner type(s).
+  // `public` so conformers in other modules (e.g. Worklets) inherit the default.
+  public var isJSThreadDecodable: Bool {
+    return false
   }
 }
 

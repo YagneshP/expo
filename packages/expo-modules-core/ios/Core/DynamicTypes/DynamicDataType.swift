@@ -35,6 +35,10 @@ internal struct DynamicDataType: AnyDynamicType {
     }
   }
 
+  var isJSThreadDecodable: Bool {
+    return true
+  }
+
   var description: String {
     return String(describing: Data.self)
   }

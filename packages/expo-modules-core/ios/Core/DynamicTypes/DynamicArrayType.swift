@@ -88,6 +88,10 @@ internal struct DynamicArrayType: AnyDynamicType {
     return jsArray.asValue()
   }
 
+  var isJSThreadDecodable: Bool {
+    return elementType.isJSThreadDecodable
+  }
+
   var description: String {
     "[\(elementType.description)]"
   }

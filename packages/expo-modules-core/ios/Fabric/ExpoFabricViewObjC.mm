@@ -121,6 +121,17 @@ static std::unordered_map<std::string, ExpoViewComponentDescriptor<>::Flavor> _c
 
   if (updateMask & RNComponentViewUpdateMaskProps) {
     const auto &newProps = static_cast<const ExpoViewProps &>(*_props);
+
+#ifdef EXPO_JSI_VIEW_PROPS
+    // Props that were decoded straight from their JavaScript values on the JS thread are
+    // applied directly (no re-casting). Any prop not present in the decoded set still flows
+    // through the legacy dictionary path below.
+    EXDecodedViewProps *decodedProps = nil;
+    if (newProps.decodedProps) {
+      decodedProps = (__bridge EXDecodedViewProps *)newProps.decodedProps.get();
+    }
+#endif // EXPO_JSI_VIEW_PROPS
+
     NSMutableDictionary<NSString *, id> *propsMap = [[NSMutableDictionary alloc] init];
 
     for (const auto &item : newProps.propsMap) {
@@ -131,6 +142,12 @@ static std::unordered_map<std::string, ExpoViewComponentDescriptor<>::Flavor> _c
         propsMap[propName] = convertFollyDynamicToId(item.second);
       }
     }
+
+#ifdef EXPO_JSI_VIEW_PROPS
+    if (decodedProps != nil) {
+      [self applyDecodedProps:decodedProps];
+    }
+#endif // EXPO_JSI_VIEW_PROPS
 
     [self updateProps:propsMap];
     [self viewDidUpdateProps];
@@ -154,6 +171,11 @@ static std::unordered_map<std::string, ExpoViewComponentDescriptor<>::Flavor> _c
 #pragma mark - Methods to override in Swift
 
 - (void)updateProps:(nonnull NSDictionary<NSString *, id> *)props
+{
+  // Implemented in `ExpoFabricView.swift`
+}
+
+- (void)applyDecodedProps:(nonnull EXDecodedViewProps *)decodedProps
 {
   // Implemented in `ExpoFabricView.swift`
 }

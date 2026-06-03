@@ -87,6 +87,10 @@ internal struct DynamicNumberType<NumberType>: AnyDynamicType {
     throw Conversions.ConversionToJSFailedException((kind: .number, nativeType: ValueType.self))
   }
 
+  var isJSThreadDecodable: Bool {
+    return true
+  }
+
   var description: String {
     "\(numberType)"
   }

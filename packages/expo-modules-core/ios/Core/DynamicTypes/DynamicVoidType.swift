@@ -25,6 +25,10 @@ internal struct DynamicVoidType: AnyDynamicType {
     return .undefined
   }
 
+  var isJSThreadDecodable: Bool {
+    return true
+  }
+
   var description: String {
     "Void"
   }

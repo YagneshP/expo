@@ -49,6 +49,10 @@ internal struct DynamicOptionalType: AnyDynamicType {
     return try wrappedType.convertResult(result, appContext: appContext)
   }
 
+  var isJSThreadDecodable: Bool {
+    return wrappedType.isJSThreadDecodable
+  }
+
   var description: String {
     "\(wrappedType)?"
   }

@@ -54,6 +54,10 @@ internal struct DynamicEnumType: AnyDynamicType {
     return try rawValueDynamicType.castToJS(value, appContext: appContext)
   }
 
+  var isJSThreadDecodable: Bool {
+    return innerType.getRawValueDynamicType().isJSThreadDecodable
+  }
+
   var description: String {
     "Enum<\(innerType)>"
   }

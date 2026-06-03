@@ -70,6 +70,13 @@ internal struct DynamicConvertibleType: AnyDynamicType {
     return try innerType.convertResult(result, appContext: appContext)
   }
 
+  // Records and most convertibles decode into detached Swift values (structs of decoded
+  // fields, registry references). Convertibles whose decoded representation retains a live
+  // JSI handle are out of scope for JS-thread decoding (see the JSI view-props design).
+  var isJSThreadDecodable: Bool {
+    return true
+  }
+
   var description: String {
     String(describing: innerType.self)
   }

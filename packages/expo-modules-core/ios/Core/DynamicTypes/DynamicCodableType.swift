@@ -53,6 +53,12 @@ internal struct DynamicCodableType<InnerType>: AnyDynamicType {
     return try castToJS(result, appContext: appContext)
   }
 
+  // `JSValueDecoder` materializes native values during decoding, producing a detached
+  // `Decodable` value with no retained JSI handle.
+  var isJSThreadDecodable: Bool {
+    return true
+  }
+
   var description: String {
     "Codable<\(InnerType.self)>"
   }

@@ -60,6 +60,10 @@ internal struct DynamicSharedObjectType: AnyDynamicType {
     throw NativeSharedObjectNotFoundException()
   }
 
+  var isJSThreadDecodable: Bool {
+    return true
+  }
+
   var description: String {
     return "SharedObject<\(innerType)>"
   }

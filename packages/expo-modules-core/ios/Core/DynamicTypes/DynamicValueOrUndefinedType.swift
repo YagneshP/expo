@@ -46,6 +46,10 @@ internal struct DynamicValueOrUndefinedType<InnerType: AnyArgument>: AnyDynamicT
     return try dynamicInnerType.castToJS(value, appContext: appContext)
   }
 
+  var isJSThreadDecodable: Bool {
+    return dynamicInnerType.isJSThreadDecodable
+  }
+
   var description: String {
     return "ValueOrUndefined<\(dynamicInnerType)>"
   }
