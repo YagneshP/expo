@@ -19,9 +19,7 @@ internal class WidgetsHermesRuntime : Closeable {
   }
 
   override fun close() {
-    if (mHybridData.isValid) {
-      mHybridData.resetNative()
-    }
+    mHybridData.resetNative()
   }
 
   private external fun nativeEvaluateBundle(script: String, sourceUrl: String)

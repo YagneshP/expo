@@ -7,7 +7,6 @@
 #include <memory>
 #include <mutex>
 #include <optional>
-#include <stdexcept>
 #include <string>
 #include <unordered_map>
 
@@ -66,8 +65,8 @@ namespace expo::widgets {
       runtime = facebook::hermes::makeHermesRuntime(config);
     }
 
-    static jobject initHybrid(JNIEnv *, jclass) {
-      return makeCxxInstance().release();
+    static jni::local_ref<WidgetsHermesRuntime::jhybriddata> initHybrid(jni::alias_ref<jhybridobject> clazz) {
+      return makeCxxInstance();
     }
 
     static void registerNatives() {
