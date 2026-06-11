@@ -25,6 +25,7 @@ export const executeCLIASync = async (
   } catch (error) {
     if (!options.ignoreErrors) {
       console.error(error);
+      console.error(processOutput(error));
       throw error;
     }
 
@@ -51,6 +52,7 @@ export const executeExpoCLIAsync = async (
   } catch (error) {
     if (!options.ignoreErrors) {
       console.error(error);
+      console.error(processOutput(error));
       throw error;
     }
 
@@ -77,6 +79,7 @@ export const executeCreateExpoCLIAsync = async (
   } catch (error) {
     if (!options.ignoreErrors) {
       console.error(error);
+      console.error(processOutput(error));
       throw error;
     }
 
@@ -104,6 +107,7 @@ export const executeCommandAsync = async (
   } catch (error) {
     if (!options.ignoreErrors) {
       console.error(error);
+      console.error(processOutput(error));
       throw error;
     }
 
