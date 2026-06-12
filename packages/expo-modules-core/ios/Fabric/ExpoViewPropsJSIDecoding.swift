@@ -21,6 +21,16 @@ public final class DecodedViewProps: NSObject {
   internal init(values: [String: Any]) {
     self.values = values
   }
+
+  /**
+   Whether the given prop was decoded on the JavaScript thread (and so will be applied via
+   `applyDecodedProps(_:)`). Used by `finalizeUpdates:` to skip re-materializing the same prop
+   through the legacy `folly::dynamic` -> `NSDictionary` path on the main thread.
+   */
+  @objc
+  public func contains(_ key: String) -> Bool {
+    return values.keys.contains(key)
+  }
 }
 
 /**
@@ -103,13 +113,19 @@ public final class ViewPropsJSIDecoder: NSObject {
         return nil
       }
       let propsObject = propsValue.getObject()
-      let propertyNames = Set(propsObject.getPropertyNames())
+
+      // Iterate the props object's OWN keys, not the full prop definition list. On a Fabric
+      // update the rawProps object holds only the props that changed (it's the diff React
+      // passes to `cloneNodeWithNewProps`), so this scales with the number of changed props
+      // rather than the total number of declared props — a win for wide views where only a
+      // few props change per update. (At initial mount the object holds all props.)
+      let changedKeys = propsObject.getPropertyNames()
 
       var decoded: [String: Any] = [:]
 
-      for (key, prop) in unsafePropsDict {
-        guard prop.isJSThreadDecodable, propertyNames.contains(key) else {
-          // Not decodable on the JS thread (or absent from this update) — leave it for the
+      for key in changedKeys {
+        guard let prop = unsafePropsDict[key], prop.isJSThreadDecodable else {
+          // Unknown prop (inherited/Yoga) or not decodable on the JS thread — leave it for the
           // legacy path so it still gets applied.
           continue
         }

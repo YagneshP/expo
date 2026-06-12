@@ -137,6 +137,15 @@ static std::unordered_map<std::string, ExpoViewComponentDescriptor<>::Flavor> _c
     for (const auto &item : newProps.propsMap) {
       NSString *propName = [NSString stringWithUTF8String:item.first.c_str()];
 
+#ifdef EXPO_JSI_VIEW_PROPS
+      // Skip props already decoded on the JS thread — they're applied via `applyDecodedProps:`
+      // below, so re-materializing them here (folly::dynamic -> NSDictionary, on the main
+      // thread) would be wasted work.
+      if (decodedProps != nil && [decodedProps contains:propName]) {
+        continue;
+      }
+#endif // EXPO_JSI_VIEW_PROPS
+
       // Ignore props inherited from the base view and Yoga.
       if ([self supportsPropWithName:propName]) {
         propsMap[propName] = convertFollyDynamicToId(item.second);
